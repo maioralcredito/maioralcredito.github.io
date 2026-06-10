@@ -242,7 +242,7 @@ body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--text);}
       <input class="finput" id="l-email" type="email" placeholder="vendedor@maioralcredito.com.br"/>
       <div class="flbl">Senha</div>
       <input class="finput" id="l-pass" type="password" placeholder="••••••••"/>
-      <button class="btn-full" onclick="document.getElementById('login-screen').style.display='none';document.getElementById('setup-screen').style.display='flex';document.getElementById('setup-screen').style.flexDirection='column';initDashboard();">Entrar na plataforma →</button>
+      <button class="btn-full" onclick="doLogin()">Entrar na plataforma →</button>
       <div class="lfoot">Maioral Crédito © 2025 · Plataforma exclusiva</div>
     </div>
   </div>
@@ -269,16 +269,7 @@ body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--text);}
         <div class="fg"><div class="flbl">Tom de venda</div><input id="s-tone" type="text" placeholder="Ex: Consultivo, direto, focado em resultado"/></div>
         <div class="fg"><div class="flbl">Diferenciais</div><input id="s-diff" type="text" placeholder="Ex: Aprovação em 24h, sem burocracia"/></div>
       </div>
-      <button class="btn-full" onclick="(function(){
-  var product=document.getElementById('s-product').value.trim();
-  var pitch=document.getElementById('s-pitch').value.trim();
-  if(!product||!pitch){alert('Preencha Produto e Pitch.');return;}
-  window._cfg={product:product,pitch:document.getElementById('s-pitch').value,obj:document.getElementById('s-obj').value,q:document.getElementById('s-q').value,tone:document.getElementById('s-tone').value||'Consultivo e direto',diff:document.getElementById('s-diff').value};
-  cfg=window._cfg;
-  document.getElementById('setup-screen').style.display='none';
-  document.getElementById('call-screen').style.display='flex';
-  document.getElementById('call-screen').style.flexDirection='column';
-})()">⚡ Ativar Copiloto</button>
+      <button class="btn-full" onclick="startApp()">⚡ Ativar Copiloto</button>
     </div>
   </div>
 </div>
@@ -436,22 +427,27 @@ function goTo(s){
   });
 }
 function doLogin(){
-  const e=document.getElementById("l-email").value.trim();
-  const p=document.getElementById("l-pass").value.trim();
-  loggedUser=(e||"vendedor").split("@")[0];
-  const ini=loggedUser[0].toUpperCase();
-  ["av0","av1","av2","av3"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ini;});
-  initDashboard();
-  document.getElementById("login-screen").style.display="none";
-  document.getElementById("setup-screen").style.display="flex";
-  document.getElementById("setup-screen").style.flexDirection="column";
+  try {
+    var e=document.getElementById("l-email").value||"vendedor";
+    loggedUser=e.split("@")[0]||"M";
+    var ini=loggedUser[0].toUpperCase();
+    ["av0","av1","av2","av3"].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=ini;});
+    initDashboard();
+    document.getElementById("login-screen").style.display="none";
+    document.getElementById("setup-screen").style.display="flex";
+    document.getElementById("setup-screen").style.flexDirection="column";
+  } catch(err){ alert("Erro login: "+err.message); }
 }
 function startApp(){
-  const product=document.getElementById("s-product").value.trim();
-  const pitch=document.getElementById("s-pitch").value.trim();
-  if(!product||!pitch){alert("Preencha Produto e Pitch.");return;}
-  cfg={product,pitch,obj:document.getElementById("s-obj").value.trim(),q:document.getElementById("s-q").value.trim(),tone:document.getElementById("s-tone").value.trim()||"Consultivo e direto",diff:document.getElementById("s-diff").value.trim()};
-  goTo("call");
+  try {
+    var product=document.getElementById("s-product").value.trim();
+    var pitch=document.getElementById("s-pitch").value.trim();
+    if(!product||!pitch){alert("Preencha Produto e Pitch.");return;}
+    cfg={product:product,pitch:pitch,obj:document.getElementById("s-obj").value.trim(),q:document.getElementById("s-q").value.trim(),tone:document.getElementById("s-tone").value.trim()||"Consultivo e direto",diff:document.getElementById("s-diff").value.trim()};
+    document.getElementById("setup-screen").style.display="none";
+    document.getElementById("call-screen").style.display="flex";
+    document.getElementById("call-screen").style.flexDirection="column";
+  } catch(err){ alert("Erro setup: "+err.message); }
 }
 function setStage(idx,el){currentStage=idx;document.querySelectorAll(".stg-btn").forEach(b=>b.classList.remove("active"));el.classList.add("active");}
 

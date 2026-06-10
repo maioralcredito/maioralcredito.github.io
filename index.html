@@ -269,7 +269,16 @@ body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--text);}
         <div class="fg"><div class="flbl">Tom de venda</div><input id="s-tone" type="text" placeholder="Ex: Consultivo, direto, focado em resultado"/></div>
         <div class="fg"><div class="flbl">Diferenciais</div><input id="s-diff" type="text" placeholder="Ex: Aprovação em 24h, sem burocracia"/></div>
       </div>
-      <button class="btn-full" onclick="startApp()">⚡ Ativar Copiloto</button>
+      <button class="btn-full" onclick="(function(){
+  var product=document.getElementById('s-product').value.trim();
+  var pitch=document.getElementById('s-pitch').value.trim();
+  if(!product||!pitch){alert('Preencha Produto e Pitch.');return;}
+  window._cfg={product:product,pitch:document.getElementById('s-pitch').value,obj:document.getElementById('s-obj').value,q:document.getElementById('s-q').value,tone:document.getElementById('s-tone').value||'Consultivo e direto',diff:document.getElementById('s-diff').value};
+  cfg=window._cfg;
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('call-screen').style.display='flex';
+  document.getElementById('call-screen').style.flexDirection='column';
+})()">⚡ Ativar Copiloto</button>
     </div>
   </div>
 </div>

@@ -457,9 +457,17 @@ function setStage(idx,el){currentStage=idx;document.querySelectorAll(".stg-btn")
 
 async function startCall(){
   try{
-    // Cria sala via servidor (chave Daily fica segura no servidor)
-    const roomRes=await fetch("/api/room",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({properties:{max_participants:10,exp:Math.floor(Date.now()/1000)+7200}})});
-    const room=await roomRes.json();
+    // Cria sala via servidor
+    let room;
+    try {
+      const roomRes=await fetch("/api/room",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({properties:{max_participants:10,exp:Math.floor(Date.now()/1000)+7200}})});
+      room=await roomRes.json();
+      if(room.error){throw new Error(room.error);}
+    } catch(apiErr) {
+      // Fallback: cria sala direto com Daily key
+      const roomRes2=await fetch("https://api.daily.co/v1/rooms",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer bda3f141c659718dfaedb0a209ec9dd8fb71529879b15fdb3eae9c000ce4902d"},body:JSON.stringify({properties:{max_participants:10,exp:Math.floor(Date.now()/1000)+7200}})});
+      room=await roomRes2.json();
+    }
     currentRoomUrl="https://"+DAILY_DOMAIN+".daily.co/"+room.name;
     document.getElementById("video-placeholder").style.display="none";
     const container=document.getElementById("daily-container");

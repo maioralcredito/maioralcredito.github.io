@@ -429,11 +429,13 @@ function goTo(s){
 function doLogin(){
   const e=document.getElementById("l-email").value.trim();
   const p=document.getElementById("l-pass").value.trim();
-  if(!e||!p){alert("Preencha e-mail e senha.");return;}
-  loggedUser=e.split("@")[0];
+  loggedUser=(e||"vendedor").split("@")[0];
   const ini=loggedUser[0].toUpperCase();
   ["av0","av1","av2","av3"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ini;});
-  initDashboard();goTo("setup");
+  initDashboard();
+  document.getElementById("login-screen").style.display="none";
+  document.getElementById("setup-screen").style.display="flex";
+  document.getElementById("setup-screen").style.flexDirection="column";
 }
 function startApp(){
   const product=document.getElementById("s-product").value.trim();

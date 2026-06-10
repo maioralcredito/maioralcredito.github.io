@@ -531,20 +531,8 @@ function checkTriggers(text){
 }
 async function generateSuggestion(triggerText,type,trg){
   if(processingLock)return;processingLock=true;hideEmpty();const loadId=addLoading();
-  const system="Você é o copiloto de vendas da Maioral Crédito (B2B de crédito empresarial). Oriente o vendedor EM TEMPO REAL.
-PRODUTO: "+cfg.product+"
-PITCH: "+cfg.pitch+"
-TOM: "+cfg.tone+(cfg.diff?"
-DIFERENCIAIS: "+cfg.diff:"")+(cfg.obj?"
-OBJEÇÕES:
-"+cfg.obj:"")+(cfg.q?"
-PERGUNTAS:
-"+cfg.q:"")+"
-REGRAS: Direto. Máx 3 blocos de 2-3 linhas. Use 🗣️ falar, 🔍 estratégia, ⚡ próximo passo. Português natural.";
-  const user="ETAPA: "+STAGES[currentStage]+"
-SITUAÇÃO: "+trg.label+"
-CLIENTE DISSE: "+triggerText+"
-Oriente agora.";
+  const system="Voce e o copiloto de vendas da Maioral Credito. Oriente o vendedor EM TEMPO REAL. PRODUTO: "+cfg.product+". PITCH: "+cfg.pitch+". TOM: "+cfg.tone+(cfg.diff?". DIFERENCIAIS: "+cfg.diff:"")+(cfg.obj?". OBJECOES: "+cfg.obj:"")+(cfg.q?". PERGUNTAS: "+cfg.q:"")+". REGRAS: Direto. Max 3 blocos de 2-3 linhas. Use falar, estrategia, proximo passo. Portugues natural.";
+  const user="ETAPA: "+STAGES[currentStage]+". SITUACAO: "+trg.label+". CLIENTE DISSE: "+triggerText+". Oriente agora.";
   try{
     // Chama o servidor proxy — chave Anthropic fica segura
     const res=await fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:800,system,messages:[{role:"user",content:user}]})});

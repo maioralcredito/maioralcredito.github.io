@@ -242,7 +242,7 @@ body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--text);}
       <input class="finput" id="l-email" type="email" placeholder="vendedor@maioralcredito.com.br"/>
       <div class="flbl">Senha</div>
       <input class="finput" id="l-pass" type="password" placeholder="••••••••"/>
-      <button class="btn-full" onclick="doLogin()">Entrar na plataforma →</button>
+      <button class="btn-full" onclick="document.getElementById('login-screen').style.display='none';document.getElementById('setup-screen').style.display='flex';document.getElementById('setup-screen').style.flexDirection='column';initDashboard();">Entrar na plataforma →</button>
       <div class="lfoot">Maioral Crédito © 2025 · Plataforma exclusiva</div>
     </div>
   </div>

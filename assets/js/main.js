@@ -60,6 +60,30 @@ function initHeaderScroll() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
+function initHeroParallax() {
+  const title = document.getElementById('heroTitle');
+  if (!title || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let ticking = false;
+  const range = 400;
+  const update = () => {
+    const progress = Math.min(window.scrollY / range, 1);
+    title.style.transform = `translateY(${progress * -40}px)`;
+    title.style.opacity = String(1 - progress * 0.6);
+    ticking = false;
+  };
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+}
+
 function initMobileNav() {
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mobileNav');
@@ -79,7 +103,7 @@ function initMobileNav() {
 }
 
 function initRevealOnScroll() {
-  const items = document.querySelectorAll('.reveal');
+  const items = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
   if (!items.length) return;
 
   if (!('IntersectionObserver' in window)) {
@@ -107,11 +131,55 @@ function initFooterYear() {
   if (el) el.textContent = new Date().getFullYear();
 }
 
+function initCountUp() {
+  const els = document.querySelectorAll('.big-number');
+  if (!els.length) return;
+
+  els.forEach((el) => {
+    const raw = el.textContent.trim();
+    const match = raw.match(/[\d.]+/);
+    if (!match) return;
+    el.dataset.target = match[0].replace(/\./g, '');
+    el.dataset.prefix = raw.slice(0, raw.indexOf(match[0]));
+  });
+
+  const animate = (el) => {
+    const target = Number(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const duration = 1100;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + Math.round(target * eased).toLocaleString('pt-BR');
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  if (!('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  els.forEach((el) => observer.observe(el));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initWhatsAppLinks();
   initLeadForm();
   initHeaderScroll();
+  initHeroParallax();
   initMobileNav();
   initRevealOnScroll();
+  initCountUp();
   initFooterYear();
 });

@@ -1,9 +1,7 @@
 // ============================================================================
-// Maioral Crédito — site institucional
-// TODO: substitua pelo número real de WhatsApp da Maioral Crédito (com DDI+DDD,
-// só dígitos, ex: "5519912345678") antes de publicar em produção.
+// Maioral Crédito, site institucional
 // ============================================================================
-const WHATSAPP_NUMBER = '5500000000000';
+const WHATSAPP_NUMBER = '5519989582642';
 const WHATSAPP_DEFAULT_MESSAGE = 'Olá! Sou de uma clínica odontológica e quero saber mais sobre a parceria com a Maioral Crédito.';
 
 function buildWhatsAppUrl(message) {

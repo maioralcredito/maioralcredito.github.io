@@ -409,9 +409,9 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
   align-items: start;
 }
 .founder-photo {
-  width: 180px; height: 180px;
+  width: 180px; height: 230px;
   object-fit: cover;
-  object-position: top center;
+  object-position: center 22%;
   border: 1px solid var(--line);
 }
 .founder-name { font-size: 24px; margin-bottom: 6px; }
@@ -520,7 +520,7 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
   .audience-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .founder-row { grid-template-columns: 1fr; }
-  .founder-photo { width: 120px; height: 120px; }
+  .founder-photo { width: 130px; height: 166px; }
   .stat-strip-row { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(3) { border-left: none; padding-left: 0; }
   .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--line); padding-bottom: 24px; }

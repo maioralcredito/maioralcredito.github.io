@@ -5,16 +5,17 @@
    ========================================================================== */
 
 :root {
-  --gold: #C9A84C;
-  --blue: #2E6BFF;
-  --bg: #0A1330;
-  --bg-alt: #0E1B40;
-  --line: #24316B;
-  --line-soft: #182352;
-  --text: #F2F4FC;
-  --text-muted: #96A2CC;
-  --text-dim: #5C6699;
-  --font-display: 'Syne', sans-serif;
+  --gold: #B8923D;
+  --blue: #2E5BFF;
+  --ink: #0F1B3D;
+  --bg: #F5F3ED;
+  --bg-alt: #ECE9E0;
+  --line: #D6D1C0;
+  --line-soft: #E2DDCE;
+  --text: #12172B;
+  --text-muted: #5B6178;
+  --text-dim: #8B90A3;
+  --font-display: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --container: 1180px;
   --edge: 32px;
@@ -38,7 +39,7 @@ a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
 em { font-style: normal; color: var(--text); }
 
-h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.05; letter-spacing: -.01em; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.05; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 
 .container {
   width: 100%;
@@ -85,7 +86,7 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
   transition: opacity .15s ease, border-color .15s ease, background .15s ease, color .15s ease;
   white-space: nowrap;
 }
-.btn-gold { background: var(--gold); color: var(--bg); }
+.btn-gold { background: var(--gold); color: var(--ink); font-weight: 800; }
 .btn-gold:hover { opacity: .88; }
 .btn-line { border-color: var(--line); color: var(--text); background: transparent; }
 .btn-line:hover { border-color: var(--gold); color: var(--gold); }
@@ -114,7 +115,7 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
   height: 84px;
   display: flex;
   align-items: center;
-  background: rgba(10, 19, 48, .82);
+  background: rgba(245, 243, 237, .82);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
@@ -155,7 +156,9 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
    ========================================================================== */
 .hero-title {
   font-size: clamp(44px, 8.4vw, 108px);
+  font-weight: 900;
   line-height: .98;
+  letter-spacing: -.03em;
   margin: 8px 0 56px;
 }
 
@@ -298,7 +301,8 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
 .big-number {
   font-family: var(--font-display);
   font-size: clamp(64px, 12vw, 152px);
-  font-weight: 800;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
   color: var(--gold);
   line-height: .95;
   margin: 8px 0 24px;
@@ -438,10 +442,10 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
   height: 48px;
   padding: 0 18px 0 14px;
   background: var(--gold);
-  color: var(--bg);
+  color: var(--ink);
   font-size: 13px; font-weight: 700;
   border-radius: 2px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  box-shadow: 0 8px 24px rgba(15, 27, 61, .2);
   transition: opacity .15s ease;
 }
 .wa-float:hover { opacity: .88; }
@@ -509,4 +513,4 @@ section { padding: 120px 0; border-top: 1px solid var(--line); }
 .mobile-nav.open { transform: translateY(0); }
 .mobile-nav a { font-size: 15px; font-weight: 600; color: var(--text-muted); }
 .mobile-nav a:hover { color: var(--gold); }
-.mobile-nav a.btn-gold, .mobile-nav a.btn-gold:hover { color: var(--bg); }
+.mobile-nav a.btn-gold, .mobile-nav a.btn-gold:hover { color: var(--ink); }

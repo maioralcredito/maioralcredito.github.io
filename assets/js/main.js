@@ -2,7 +2,7 @@
 // Maioral Crédito, site institucional
 // ============================================================================
 const WHATSAPP_NUMBER = '5519989582642';
-const WHATSAPP_DEFAULT_MESSAGE = 'Olá! Sou de uma clínica odontológica e quero saber mais sobre a parceria com a Maioral Crédito.';
+const WHATSAPP_DEFAULT_MESSAGE = 'Olá! Trabalho em uma clínica odontológica e gostaria de saber mais sobre a parceria com a Maioral Crédito.';
 
 function buildWhatsAppUrl(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -38,7 +38,7 @@ function initLeadForm() {
     const msg = form.fMsg.value.trim();
 
     const lines = [
-      'Olá! Quero ser clínica parceira da Maioral Crédito.',
+      'Olá! Gostaria que minha clínica se tornasse parceira da Maioral Crédito.',
       `Nome: ${name}`,
       `Clínica: ${clinica}`,
       `WhatsApp: ${whats}`,
